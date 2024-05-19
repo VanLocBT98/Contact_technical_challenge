@@ -1,0 +1,48 @@
+.a-button {
+  @include adjust-flex(center, center);
+  @include font-base(14, 21);
+  color: $white;
+  background-color: $dark-tangerine;
+  border-radius: $border-radius-button;
+  padding: rem(8) rem(20);
+
+  &:disabled {
+    background-color: $gainsboro;
+    color: $white;
+    opacity: 0.5;
+  }
+  &:hover {
+    background-color: rgba($dark-tangerine, 0.8);
+    color: $black;
+  }
+  &:focus {
+    box-shadow: $box-shadow-button !important;
+    outline: $box-shadow-button !important;
+    transition: none !important;
+  }
+  @include style-color();
+  &-loading {
+    align-items: center;
+
+    img {
+      @include adjust-loading(26, 25);
+    }
+  }
+  &-md {
+    height: rem(40);
+  }
+  &-cancel {
+    border: rem(1) solid $white;
+    white-space: pre-wrap;
+    @include font-base(12.48, 20);
+    border-radius: rem(5);
+    background-color: $gainsboro;
+    color: $black;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $columbia-blue;
+      border: 1px solid $queen-pink;
+    }
+  }
+}

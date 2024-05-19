@@ -1,0 +1,121 @@
+.a-input {
+    $root: &;
+    position: relative;
+
+    &_wrap {
+        position: relative;
+    }
+
+    &_input {
+        @include font-base(12, 20);
+        border: 1px solid $dim-gray;
+        background-color: $white;
+        padding: rem(6) rem(11) rem(7) rem(11);
+        appearance: none;
+        font-family: inherit;
+        outline: none;
+        transition: all $transition linear;
+        width: 100%;
+
+        #{$root}-borderRadius & {
+            border-color: $arsenic;
+            border-radius: rem(10);
+            padding: rem(8);
+        }
+        #{$root}-inputSearch & {
+            border-color: transparent;
+            border-radius: rem(32);
+            padding: rem(20) rem(32);
+            letter-spacing: 0.0015em;
+            @include font-base(20,28);
+            @include mobile-down {
+                padding: rem(12) rem(18);
+                @include font-base(16, 20);
+            }
+
+            &::placeholder {
+                color: $gray-x11;
+            }
+        }
+
+        #{$root}-hasIcon & {
+            border-color: $arsenic;
+            border-radius: rem(10);
+            padding: rem(8) rem(32) rem(8) rem(8);
+        }
+
+        #{$root}-contactForm & {
+            border-color: $cool-black;
+            border-radius: rem(2);
+            padding: rem(5) rem(11);
+            @include mobile-down {
+                padding: rem(3) rem(7);
+            }
+
+            &::placeholder {
+                color: $taupe-gray;
+            }
+        }
+
+        #{$root}-isError & {
+            border-color: $sinopia !important;
+            color: $sinopia !important;
+        }
+
+        &::placeholder {
+            font-weight: 400;
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            display: none;
+        }
+
+        &:focus {
+            border-color: $may-green;
+        }        
+    }
+
+    &_icon {
+        background: transparent;
+        cursor: pointer;
+        @include adjust-flex();
+        border: 0;
+        height: rem(24);
+        width: rem(24);
+        padding: 0;
+        position: absolute;
+        right: rem(8);
+        top: 50%;
+        transform: translateY(-50%);
+
+        .a-icon {
+            margin: auto;
+        }
+    }
+
+    &_label {
+        @include font-base(12, 20);
+        display: block;
+        color: $arsenic;
+        margin-bottom: rem(8);
+
+        #{$root}-isError & {
+            color: $sinopia;
+        }
+    }
+
+    &_error {
+        @include font-base(12, 16);
+        color: $sinopia;
+        display: block;
+        margin-top: rem(8);
+    }
+
+    &-disabled {
+        #{$root}_input {
+            background: $snow;
+        }
+    }
+
+}

@@ -1,0 +1,11 @@
+.p-home {
+  margin-top: 5%;
+  &_list {
+    @include adjust-flex();
+    width: 100%;
+    column-gap: rem(10);
+    .o-cardDivision {
+      min-width: 20%;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+$size-icon: (
+    '17x17': (w: 17, h: 17),
+    '24x24': (w: 24, h: 24),
+    '32x32': (w: 32, h: 32),
+    '16x16': (w: 16, h: 16),
+);
+
+$icon-src: (
+    'search': icon-path-generation('ic_search.svg'),
+    'searchCoolBlack': icon-path-generation('ic_search_cool_black.svg'),
+    'close_white': icon-path-generation('ic_close_white.svg'),
+    'close_teal':  icon-path-generation('ic_close_teal.svg'),
+    'arrow_teal':  icon-path-generation('ic_arrow_teal.svg'),
+
+
+);
+
+.a-icon {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+
+    @each $size,
+        $val in $size-icon {
+        &-#{$size} {
+            height: map-get($val, 'h')+ px;
+            width: map-get($val, 'w') + px;
+        }
+    }
+
+    @each $icon,
+        $val in $icon-src {
+        &-#{$icon} {
+            background-image: url($val);
+        }
+    }
+}

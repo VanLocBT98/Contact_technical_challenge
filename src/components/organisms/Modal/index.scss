@@ -1,0 +1,124 @@
+.o-modal {
+    $root: &;
+    border: 0;
+    color: $white;
+    height: 100%;
+    outline: 0;
+    overflow: auto;
+    position: fixed;
+    width: 100%;
+  
+    &_main {
+        align-items: center;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        min-height: 100%;
+        padding: rem(50) 0;
+  
+        @include tablet-down {
+            padding: rem(30) rem(16);
+        }
+    }
+  
+    &_wrapper {
+        background-color: $white;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+  
+    &_close {
+        background: transparent;
+        padding: 0;
+        position: absolute;
+        right: rem(16);
+        top: rem(16);
+        z-index: 1;
+        @include reset-button();
+    }
+  
+    // Add more modifiers below here
+
+    &-image {
+    
+        #{$root}_wrapper {
+            background: transparent;
+            position: initial;
+        }
+    
+    }
+
+    &-video {
+    
+        #{$root}_wrapper {
+            background: transparent;
+            position: initial;
+        }
+    
+    }
+
+    &-notify {
+        #{$root}_main {
+            max-width: rem(600);
+        }
+        #{$root}_wrapper {
+            border-radius: rem(12);
+        }
+    }
+    
+    &-utilities {
+        #{$root}_main {
+            background-color: $white;
+        }
+        #{$root}_wrapper {
+            background: transparent;
+            position: initial;
+        }
+    }
+}
+  
+.ReactModal__Overlay {
+    background: rgba($black, 0.5) !important;
+    inset: 0;
+    opacity: 0;
+    position: fixed;
+    transform: translateY(-100%);
+    transition: all $transition-long ease-in-out;
+    z-index: $z-modal;
+  
+    &::after {
+        background: rgba($black, 0.5) !important;
+        content: '';
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+    }
+  
+    &--open {
+        overflow: hidden;
+  
+        @include tablet-up {
+            padding-right: rem(7);
+        }
+    }
+  
+    &--after-open {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  
+    &--before-close {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
+  
+.reactmodal-body-open,
+.reactmodal-html-open {
+    overflow: hidden;
+}

@@ -1,0 +1,46 @@
+@use 'sass:math';
+@function rem($pixel) {
+  @if not $pixel {
+    @error 'Missing argument $pixel';
+  }
+
+  @return math.div($pixel, 16) * 1rem;
+}
+
+@function icon-path-generation($filename) {
+  @if not $filename {
+    @error 'Missing argument $pixel';
+  }
+
+  @return '#{$icon-path}#{$filename}';
+}
+
+@function get-default($var, $default) {
+  @if ($var) {
+    @return $var;
+  }
+  @return $default;
+}
+
+@function desktopVw($pixel) {
+  @return math.div(rem($pixel), rem(1920)) * 100vw;
+}
+
+@function miniDesktopVw($pixel) {
+  @return math.div(rem($pixel), rem(1600)) * 100vw;
+}
+
+@function tabletVw($pixel) {
+  @return math.div(rem($pixel), rem(1199)) * 100vw;
+}
+
+@function mobileVw($pixel) {
+  @return math.div(rem($pixel), rem(640)) * 100vw;
+}
+
+@function scaleIframe($pixel, $view-width) {
+  @if not $view-width {
+    @error 'Missing argument $pixel';
+  }
+  @return math.percentage(math.div(rem($pixel), rem($view-width)));
+}

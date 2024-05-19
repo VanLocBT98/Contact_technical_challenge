@@ -1,0 +1,35 @@
+.a-image {
+    display: block;
+    position: relative;
+
+    img {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    $object-fit: cover, contain;
+    
+    @each $obj in $object-fit {
+        &-#{$obj} {
+            img {
+                object-fit: $obj;
+            }
+        }
+    }
+
+    $ratios: '1x1',
+        '354x221';
+
+    @each $ratio in $ratios {
+        &-#{$ratio} {
+            $unquote: unquote($ratio);
+            $index: str-index($unquote, 'x');
+            $width: str-slice($unquote, 1, $index - 1);
+            $height: str-slice($unquote, $index + 1, str-length($unquote));
+            padding-bottom: calc(($height / $width) * 100%);
+        }
+    }
+}

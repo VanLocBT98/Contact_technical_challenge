@@ -1,0 +1,15 @@
+.o-notify {
+    &_content {
+        background-color: $white;
+        padding: rem(40) rem(60);
+    }
+
+    &_message {
+        margin-top: rem(12);
+    }
+
+    &_btn {
+        margin-top: rem(32);
+        @include adjust-flex(center, center);
+    }
+}
