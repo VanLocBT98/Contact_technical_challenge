@@ -9,11 +9,11 @@ export default {
   argTypes: {
     size: {
       options: ['contain', 'cover'],
-      control: { type: 'select' },
+      control: { type: 'select' }
     },
     loading: {
       options: ['lazy', 'eager'],
-      control: { type: 'select' },
+      control: { type: 'select' }
     }
   },
   args: {
@@ -23,7 +23,7 @@ export default {
     alt: 'alt holder',
     ratio: '1x1',
     size: 'cover',
-    loading: 'lazy',
+    loading: 'lazy'
   }
 } as Meta;
 

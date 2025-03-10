@@ -19,15 +19,12 @@ interface TextAreaProps {
   disabled?: boolean;
   handleOnchange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   modifiers?: GeneralTextStyle[];
-  variant?: Variant,
-  readOnly: boolean,
-  onKeyPress?: React.KeyboardEventHandler<HTMLTextAreaElement>
+  variant?: Variant;
+  readOnly: boolean;
+  onKeyPress?: React.KeyboardEventHandler<HTMLTextAreaElement>;
 }
 
-const TextAreaRef: React.ForwardRefRenderFunction<
-  HTMLTextAreaElement,
-  TextAreaProps
-> = (
+const TextAreaRef: React.ForwardRefRenderFunction<HTMLTextAreaElement, TextAreaProps> = (
   {
     id,
     label,
@@ -38,43 +35,39 @@ const TextAreaRef: React.ForwardRefRenderFunction<
     colorError,
     value,
     disabled,
-    handleOnchange = () => { },
+    handleOnchange = () => {},
     modifiers,
     variant,
     readOnly = false,
     onKeyPress
   },
-  ref,
+  ref
 ) => (
-    <div className={ModifierUtils.map('a-textarea', modifiers, variant)}>
-      {label && (
-        <div className="a-textarea_label">
-          <label htmlFor={id}>
-            <Typography content={label} modifiers={['black', '14x21', '400', 'capitalize']} />
-          </label>
-          {required && <span className="a-textarea_label-required">*</span>}
-        </div>
-      )}
-      <textarea
-        name={id}
-        className={ModifierUtils.map('a-textarea_input', error && 'error', modifiers, variant)}
-        value={value}
-        ref={ref}
-        rows={rows}
-        disabled={disabled}
-        placeholder={placeholder}
-        onChange={handleOnchange}
-        id={id}
-        readOnly={readOnly}
-        onKeyPress={onKeyPress}
-      />
-      {error && (
-        <span className={ModifierUtils.map('a-textarea_error', colorError)}>
-          {error}
-        </span>
-      )}
-    </div>
-  );
+  <div className={ModifierUtils.map('a-textarea', modifiers, variant)}>
+    {label && (
+      <div className='a-textarea_label'>
+        <label htmlFor={id}>
+          <Typography content={label} modifiers={['black', '14x21', '400', 'capitalize']} />
+        </label>
+        {required && <span className='a-textarea_label-required'>*</span>}
+      </div>
+    )}
+    <textarea
+      name={id}
+      className={ModifierUtils.map('a-textarea_input', error && 'error', modifiers, variant)}
+      value={value}
+      ref={ref}
+      rows={rows}
+      disabled={disabled}
+      placeholder={placeholder}
+      onChange={handleOnchange}
+      id={id}
+      readOnly={readOnly}
+      onKeyPress={onKeyPress}
+    />
+    {error && <span className={ModifierUtils.map('a-textarea_error', colorError)}>{error}</span>}
+  </div>
+);
 
 const TextArea = forwardRef(TextAreaRef);
 

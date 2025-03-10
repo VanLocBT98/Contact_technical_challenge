@@ -6,7 +6,7 @@ import Notify from '.';
 export default {
   title: 'Components/organisms/Notify',
   component: Notify,
-  argTypes: {},
+  argTypes: {}
 } as Meta;
 
 export const normal: Story = () => {
@@ -14,13 +14,15 @@ export const normal: Story = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <button type="button" onClick={() => setIsOpen(true)}>Open</button>
+      <button type='button' onClick={() => setIsOpen(true)}>
+        Open
+      </button>
       <Notify
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        title="Contact successful"
-        message="Thank you for contacting us. We will contact as soon as possible."
-        btnText="Confirm"
+        title='Contact successful'
+        message='Thank you for contacting us. We will contact as soon as possible.'
+        btnText='Confirm'
       />
     </>
   );

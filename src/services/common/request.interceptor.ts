@@ -1,10 +1,8 @@
 import { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
-
 export const RequestInterceptorResolve = (
   config: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
-
   return config;
 };
 

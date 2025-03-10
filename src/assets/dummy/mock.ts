@@ -1,4 +1,4 @@
-import { PLACEHOLDERS } from "~/utils/enums"
+import { PLACEHOLDERS } from '~/utils/enums';
 
 export const dataOption = [
   {
@@ -8,7 +8,7 @@ export const dataOption = [
     link: {
       url: '/services/normal',
       text: 'See detail'
-    },
+    }
   },
   {
     thumbnail: 'https://picsum.photos/500',
@@ -17,7 +17,7 @@ export const dataOption = [
     link: {
       url: '/services/standard',
       text: 'See detail'
-    },
+    }
   },
   {
     thumbnail: 'https://picsum.photos/500',
@@ -26,50 +26,49 @@ export const dataOption = [
     link: {
       url: '/services/premium',
       text: 'See detail'
-    },
+    }
   }
-]
+];
 
 export const dataMockForm = {
   normal: {
-    title: "Contact Normal",
+    title: 'Contact Normal',
     placeholders: {
       name: PLACEHOLDERS.NAME,
       email: PLACEHOLDERS.EMAIL,
       message: PLACEHOLDERS.MESSAGE
     },
-    submitText: "Submit",
+    submitText: 'Submit',
     price: 'free'
   },
   standard: {
-    title: "Contact Standard",
+    title: 'Contact Standard',
     placeholders: {
       name: PLACEHOLDERS.NAME,
       email: PLACEHOLDERS.EMAIL,
       phone: PLACEHOLDERS.PHONE,
       message: PLACEHOLDERS.MESSAGE
     },
-    submitText: "Submit",
+    submitText: 'Submit',
     price: '10$'
   },
   premium: {
-    title: "Contact Premium",
+    title: 'Contact Premium',
     placeholders: {
       name: PLACEHOLDERS.NAME,
       email: PLACEHOLDERS.EMAIL,
       message: PLACEHOLDERS.MESSAGE,
       phone: PLACEHOLDERS.PHONE,
       address: PLACEHOLDERS.ADDRESS,
-      company: PLACEHOLDERS.COMPANY,
-
+      company: PLACEHOLDERS.COMPANY
     },
-    submitText: "Submit",
+    submitText: 'Submit',
     price: '15$'
-  },
-}
+  }
+};
 
 export const dataConfirm = {
-  title: "Contact successful",
-  message: "Thank you for contacting us. We will contact as soon as possible.",
-  btnText: "Confirm"
-}
+  title: 'Contact successful',
+  message: 'Thank you for contacting us. We will contact as soon as possible.',
+  btnText: 'Confirm'
+};

@@ -7,15 +7,10 @@ export interface LinkProps extends Omit<RouterLinkProps, 'to'> {
   useExternal?: boolean;
 }
 
-const Link: React.FC<LinkProps> = ({
-  children, href, search, useExternal, ...props
-}) => {
+const Link: React.FC<LinkProps> = ({ children, href, search, useExternal, ...props }) => {
   if (!href) {
     return (
-      <span
-        className="a-link"
-        {...props}
-      >
+      <span className='a-link' {...props}>
         {children}
       </span>
     );
@@ -23,12 +18,7 @@ const Link: React.FC<LinkProps> = ({
 
   if (href?.includes('http') || useExternal) {
     return (
-      <a
-        className="a-link"
-        {...props}
-        href={href}
-        rel="noreferrer"
-      >
+      <a className='a-link' {...props} href={href} rel='noreferrer'>
         {children}
       </a>
     );
@@ -36,13 +26,17 @@ const Link: React.FC<LinkProps> = ({
 
   return (
     <RouterLink
-      className="a-link"
+      className='a-link'
       {...props}
-      to={search ? {
-        pathname: href,
+      to={
         search
-      } : href}
-      aria-label="label"
+          ? {
+              pathname: href,
+              search
+            }
+          : href
+      }
+      aria-label='label'
       end
     >
       {children}

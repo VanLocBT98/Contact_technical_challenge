@@ -16,13 +16,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const CustomModal: React.FC<Props> = ({
-  isOpen,
-  children,
-  icon,
-  modifiers,
-  handleClose,
-}) => (
+const CustomModal: React.FC<Props> = ({ isOpen, children, icon, modifiers, handleClose }) => (
   <Modal
     isOpen={!!isOpen}
     onRequestClose={handleClose}
@@ -30,17 +24,17 @@ const CustomModal: React.FC<Props> = ({
     className={`${ModifierUtils.map('o-modal', modifiers)}`}
     appElement={document.getElementById('root') as HTMLElement}
     ariaHideApp={false}
-    portalClassName="o-modal_portal"
-    bodyOpenClassName="overflow-hidden"
+    portalClassName='o-modal_portal'
+    bodyOpenClassName='overflow-hidden'
   >
-    <div className="o-modal_main">
-      <div className="o-modal_wrapper">
+    <div className='o-modal_main'>
+      <div className='o-modal_wrapper'>
         {icon && (
-          <button type="button" className="o-modal_close" onClick={handleClose}>
+          <button type='button' className='o-modal_close' onClick={handleClose}>
             <Icon iconName={icon.name} size={icon.size} />
           </button>
         )}
-        <div className="o-modal_body">{children}</div>
+        <div className='o-modal_body'>{children}</div>
       </div>
     </div>
   </Modal>

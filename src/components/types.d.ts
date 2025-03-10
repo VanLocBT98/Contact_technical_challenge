@@ -1,4 +1,3 @@
-
 type FontWeightStyle = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
 
 type TextStyle =
@@ -25,6 +24,4 @@ type LinkTypes = {
   target?: string;
   icon?: string;
 };
-type Ratio =
-  | '1x1'
-  | '354x221'
+type Ratio = '1x1' | '354x221';

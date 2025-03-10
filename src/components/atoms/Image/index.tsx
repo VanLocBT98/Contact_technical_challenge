@@ -14,12 +14,10 @@ export interface ImageProps {
   loading?: 'lazy' | 'eager';
 }
 
-const Image: React.FC<ImageProps> = ({
-  src, srcTablet, srcMobile, alt, ratio, size, loading
-}) => (
+const Image: React.FC<ImageProps> = ({ src, srcTablet, srcMobile, alt, ratio, size, loading }) => (
   <picture className={ModifierUtils.map('a-image', ratio, size)}>
-    <source srcSet={srcMobile} media="(max-width:576px)" />
-    <source srcSet={srcTablet} media="(max-width:992px)" />
+    <source srcSet={srcMobile} media='(max-width:576px)' />
+    <source srcSet={srcTablet} media='(max-width:992px)' />
     <img src={src} alt={alt} loading={loading} />
   </picture>
 );

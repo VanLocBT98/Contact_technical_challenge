@@ -16,7 +16,5 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Normal: Story = ({children}:StoryProps) => (
-  <AgGrid>{children}</AgGrid>
-);
-Normal.args = {}
+export const Normal: Story = ({ children }: StoryProps) => <AgGrid>{children}</AgGrid>;
+Normal.args = {};

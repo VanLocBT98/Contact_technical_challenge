@@ -1,7 +1,7 @@
 import CardDivision from './Division';
 
 const Card = {
-  Division: CardDivision,
+  Division: CardDivision
 };
 
 export default Card;

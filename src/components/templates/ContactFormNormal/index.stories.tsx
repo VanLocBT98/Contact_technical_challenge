@@ -9,7 +9,8 @@ export default {
   argTypes: {},
   args: {
     title: 'THÔNG TIN LIÊN HỆ',
-    description: 'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại và tin tức mới nhất từ Aqua City',
+    description:
+      'Quý khách đăng ký nhận email thông tin dự án, các chương trình ưu đãi, khuyến mại và tin tức mới nhất từ Aqua City',
     placeholders: {
       fullName: 'HỌ VÀ TÊN',
       address: 'ĐỊA CHỈ',
@@ -18,12 +19,7 @@ export default {
       content: 'NỘI DUNG '
     },
     submitText: 'Đăng ký nhận thông tin'
-  },
-
+  }
 } as Meta;
 
-export const Normal: Story<ContactFormProps> = ({ ...args }) => (
-  <ContactForm
-    {...args}
-  />
-);
+export const Normal: Story<ContactFormProps> = ({ ...args }) => <ContactForm {...args} />;

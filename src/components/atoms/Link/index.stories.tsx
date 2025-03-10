@@ -7,17 +7,13 @@ import Link from '.';
 export default {
   title: 'Components/atoms/Link',
   component: Link,
-  argTypes: {},
+  argTypes: {}
 } as Meta;
 
 export const normal: Story = () => (
   <BrowserRouter>
-    <Link href="internal">
-      internal
-    </Link>
+    <Link href='internal'>internal</Link>
     <br />
-    <Link href="https://google.com">
-      external
-    </Link>
+    <Link href='https://google.com'>external</Link>
   </BrowserRouter>
 );

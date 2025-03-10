@@ -13,43 +13,33 @@ export interface NotifyProps {
   onClose?: () => void;
 }
 
-const Notify: React.FC<NotifyProps> = ({
-  isOpen,
-  title,
-  message,
-  btnText,
-  onClose,
-}) => (
+const Notify: React.FC<NotifyProps> = ({ isOpen, title, message, btnText, onClose }) => (
   <Modal
     isOpen={!!isOpen}
-    modifiers="notify"
+    modifiers='notify'
     icon={{
       name: 'close_teal',
-      size: '24x24',
+      size: '24x24'
     }}
     handleClose={onClose}
   >
-    <div className="o-notify">
-      <div className="o-notify_content">
+    <div className='o-notify'>
+      <div className='o-notify_content'>
         {title && (
-          <div className="o-notify_title">
-            <Typography
-              type="h6"
-              modifiers={['black', '700', 'center']}
-              content={title}
-            />
+          <div className='o-notify_title'>
+            <Typography type='h6' modifiers={['black', '700', 'center']} content={title} />
           </div>
         )}
         {message && (
-          <div className="o-notify_message">
+          <div className='o-notify_message'>
             <Typography
-              type="p"
+              type='p'
               modifiers={['16x28', 'black', '400', 'center']}
               content={message}
             />
           </div>
         )}
-        <div className="o-notify_btn">
+        <div className='o-notify_btn'>
           <Button modifiers={['md']} onClick={onClose}>
             {btnText}
           </Button>
@@ -64,7 +54,7 @@ Notify.defaultProps = {
   title: undefined,
   message: undefined,
   btnText: undefined,
-  onClose: undefined,
+  onClose: undefined
 };
 
 export default Notify;

@@ -8,14 +8,7 @@ import './index.scss';
 
 type Heading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 type Paragraph = 'p' | 'span' | 'div';
-type Sizes =
-  | '16x24'
-  | '24x36'
-  | '12x18'
-  | '16x28'
-  | '20x40'
-  | '14x21'
-  | '32x48'
+type Sizes = '16x24' | '24x36' | '12x18' | '16x28' | '20x40' | '14x21' | '32x48';
 
 type Cursors = 'pointer' | 'all-scroll' | 'default';
 export interface TypographyProps {

@@ -32,5 +32,4 @@ export enum PLACEHOLDERS {
   ADDRESS = 'Address',
   COMPANY = 'Company *',
   MESSAGE = 'Your message *'
-
 }

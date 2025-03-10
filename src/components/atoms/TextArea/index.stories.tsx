@@ -9,35 +9,33 @@ export default {
   argTypes: {
     rows: {
       control: 'select',
-      options: ['2', '3', '4', '5', '6'],
+      options: ['2', '3', '4', '5', '6']
     },
     error: {
-      control: 'text',
+      control: 'text'
     },
     placeholder: {
       control: 'text',
-      defaultValue: 'Nội dung',
+      defaultValue: 'Nội dung'
     },
     disabled: {
       control: 'boolean',
       options: [true, false],
-      defaultValue: false,
-    },
-  },
+      defaultValue: false
+    }
+  }
 } as Meta;
 
-export const normal: Story = ({
-  rows, value, error, placeholder, disabled,
-}) => (
+export const normal: Story = ({ rows, value, error, placeholder, disabled }) => (
   <div>
     <TextArea
-      id="text-area"
+      id='text-area'
       rows={rows}
       error={error}
       value={value}
       placeholder={placeholder}
       disabled={disabled}
-      label="hiihi"
+      label='hiihi'
       readOnly={false}
     />
   </div>

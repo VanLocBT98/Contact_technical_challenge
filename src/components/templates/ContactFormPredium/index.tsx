@@ -1,9 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
-import {
-  Controller, FormProvider,
-  useForm
-} from 'react-hook-form';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 import './index.scss';
 
 import emailjs from '@emailjs/browser';
@@ -18,7 +15,11 @@ import { capitalizeKeys } from '~/hooks/useCapitalize';
 import { TYPE } from '~/utils/enums';
 import { consultancySchemas } from '~/utils/schemas';
 const ContactFormPremium: React.FC<ContactFormProps> = ({
-  title, description, submitText, placeholders, price
+  title,
+  description,
+  submitText,
+  placeholders,
+  price
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const method = useForm<ContactFormInput>({
@@ -33,22 +34,24 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
     resolver: yupResolver(consultancySchemas as any)
   });
   const handleSubmit = async (params: ContactFormInput) => {
-    const dataForm = capitalizeKeys(params as unknown as Record<string, unknown>)
-    fetch(
-      `${import.meta.env.VITE_API_URL}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...dataForm, Type: TYPE.PREMIUM, Price: price })
-      }
-    )
+    const dataForm = capitalizeKeys(params as unknown as Record<string, unknown>);
+    fetch(`${import.meta.env.VITE_API_URL}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ...dataForm, Type: TYPE.PREMIUM, Price: price })
+    })
       .then((res) => res.json())
       .then((data) => {
-        emailjs.sendForm('service_f58kpgh', 'template_vg4nxcn', '#contact-form', 'FTMvBV_oyO4vTkgs3')
-        setIsOpen(true)
-        method.reset()
+        emailjs.sendForm(
+          'service_f58kpgh',
+          'template_vg4nxcn',
+          '#contact-form',
+          'FTMvBV_oyO4vTkgs3'
+        );
+        setIsOpen(true);
+        method.reset();
       })
       .catch((error) => {
         console.log(error);
@@ -56,30 +59,38 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
   };
 
   return (
-    <div className="t-contactForm">
-      <div className="t-contactForm_wrap">
-        <Typography type="h3" modifiers={['32x48', 'deepSpaceSparkle', 'center', '700']} content={title} />
-        {description
-          && (
-            <div className="t-contactForm_description">
-              <Typography type="p" modifiers={['14x21', 'darkLiver', 'center']} content={description} />
-            </div>
-          )}
+    <div className='t-contactForm'>
+      <div className='t-contactForm_wrap'>
+        <Typography
+          type='h3'
+          modifiers={['32x48', 'deepSpaceSparkle', 'center', '700']}
+          content={title}
+        />
+        {description && (
+          <div className='t-contactForm_description'>
+            <Typography
+              type='p'
+              modifiers={['14x21', 'darkLiver', 'center']}
+              content={description}
+            />
+          </div>
+        )}
 
         <FormProvider {...method}>
-          <form className="t-contactForm_form"
+          <form
+            className='t-contactForm_form'
             id='contact-form'
             onSubmit={method.handleSubmit(handleSubmit)}
           >
-            <div className="t-contactForm_field">
+            <div className='t-contactForm_field'>
               <Controller
-                name="name"
+                name='name'
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     id={field.name}
                     label={field.name}
-                    type="text"
-                    variant="borderRadius"
+                    type='text'
+                    variant='borderRadius'
                     placeholder={placeholders?.name}
                     {...field}
                     error={error?.message}
@@ -87,15 +98,15 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
                 )}
               />
             </div>
-            <div className="t-contactForm_field">
+            <div className='t-contactForm_field'>
               <Controller
-                name="email"
+                name='email'
                 render={({ field, fieldState: { error } }) => (
-                  <div className="t-contactForm_field">
+                  <div className='t-contactForm_field'>
                     <Input
                       id={field.name}
                       label={field.name}
-                      variant="borderRadius"
+                      variant='borderRadius'
                       placeholder={placeholders?.email}
                       {...field}
                       error={error?.message}
@@ -104,16 +115,16 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
                 )}
               />
             </div>
-            <div className="t-contactForm_field">
+            <div className='t-contactForm_field'>
               <Controller
-                name="phone"
+                name='phone'
                 render={({ field, fieldState: { error } }) => (
-                  <div className="t-contactForm_field">
+                  <div className='t-contactForm_field'>
                     <Input
                       id={field.name}
                       label={field.name}
-                      type="text"
-                      variant="borderRadius"
+                      type='text'
+                      variant='borderRadius'
                       placeholder={placeholders?.phone}
                       {...field}
                       error={error?.message}
@@ -122,15 +133,15 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
                 )}
               />
             </div>
-            <div className="t-contactForm_field">
+            <div className='t-contactForm_field'>
               <Controller
-                name="address"
+                name='address'
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     id={field.name}
                     label={field.name}
                     placeholder={placeholders?.address}
-                    variant="borderRadius"
+                    variant='borderRadius'
                     {...field}
                     error={error?.message}
                     readOnly={false}
@@ -138,15 +149,15 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
                 )}
               />
             </div>
-            <div className="t-contactForm_field">
+            <div className='t-contactForm_field'>
               <Controller
-                name="company"
+                name='company'
                 render={({ field, fieldState: { error } }) => (
                   <Input
                     id={field.name}
                     label={field.name}
                     placeholder={placeholders?.company}
-                    variant="borderRadius"
+                    variant='borderRadius'
                     {...field}
                     error={error?.message}
                     readOnly={false}
@@ -154,9 +165,9 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
                 )}
               />
             </div>
-            <div className="t-contactForm_field">
+            <div className='t-contactForm_field'>
               <Controller
-                name="message"
+                name='message'
                 render={({ field, fieldState: { error } }) => (
                   <TextArea
                     rows={5}
@@ -171,16 +182,16 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
                 )}
               />
             </div>
-            <div className="t-contactForm_hidden">
+            <div className='t-contactForm_hidden'>
               <Controller
-                name="type"
+                name='type'
                 render={({ field, fieldState: { error } }) => (
-                  <div className="t-contactForm_field">
+                  <div className='t-contactForm_field'>
                     <Input
                       id={field.name}
                       label={field.name}
-                      type="text"
-                      variant="borderRadius"
+                      type='text'
+                      variant='borderRadius'
                       placeholder={placeholders?.phone}
                       {...field}
                       value={TYPE.PREMIUM}
@@ -190,16 +201,16 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
                 )}
               />
             </div>
-            <div className="t-contactForm_hidden">
+            <div className='t-contactForm_hidden'>
               <Controller
-                name="price"
+                name='price'
                 render={({ field, fieldState: { error } }) => (
-                  <div className="t-contactForm_field">
+                  <div className='t-contactForm_field'>
                     <Input
                       id={field.name}
                       label={field.name}
-                      type="text"
-                      variant="borderRadius"
+                      type='text'
+                      variant='borderRadius'
                       placeholder={placeholders?.phone}
                       {...field}
                       value={price}
@@ -209,22 +220,15 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
                 )}
               />
             </div>
-            <div className="t-contactForm_action">
-              <Button type="submit">
-                {submitText}
-              </Button>
+            <div className='t-contactForm_action'>
+              <Button type='submit'>{submitText}</Button>
             </div>
           </form>
         </FormProvider>
       </div>
-      <Notify
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        {...dataConfirm}
-      />
+      <Notify isOpen={isOpen} onClose={() => setIsOpen(false)} {...dataConfirm} />
     </div>
   );
 };
-
 
 export default ContactFormPremium;
