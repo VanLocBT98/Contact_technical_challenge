@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './index.scss';
 
+import { useQuery } from '@tanstack/react-query';
 import { Outlet } from 'react-router-dom';
+
+import Link from '~/components/atoms/Link';
 import Typography from '~/components/atoms/Typography';
+import { contactService } from '~/services/contact/index.service';
+import { useStore } from '~/stores';
+import { IOlympicData } from '~/types';
 
-interface IExampleLayoutProps {
-  children?: React.ReactNode;
-}
+const ExampleLayout: React.FC = ({ children }: { children: ReactNode }) => {
+  const {
+    MockData: { list, fetchOlympicData }
+  } = useStore();
+  const { isLoading } = useQuery({
+    queryKey: ['olympicData'],
+    queryFn: contactService.contact,
+    onSuccess: (data) => {
+      fetchOlympicData(data as IOlympicData[]);
+    },
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    refetchOnWindowFocus: false
+  });
 
-const ExampleLayout: React.FC<IExampleLayoutProps> = ({ children }) => {
-  return (
+  return isLoading && list.length === 0 ? (
+    '...Loading'
+  ) : (
     <div>
       <div className='c-exLayout'>
-        <Typography content='Technical challenge Service Contact' modifiers={['700', 'deepSpaceSparkle', '32x48', 'center']} />
+        <Typography
+          content='Check Table'
+          modifiers={['700', 'deepSpaceSparkle', '32x48', 'center']}
+        />
+      </div>
+      <div className='c-exLayout'>
+        <Link href='/'>Ag Grid</Link>
+        <Link href='/services/normal'>Tanstack Table</Link>
+        <Link href='/services/standard'>Enterprice Table</Link>
+        <Link href='/services/premium'>MUI Premium</Link>
       </div>
       {children}
       <Outlet />

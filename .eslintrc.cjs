@@ -67,6 +67,7 @@ module.exports = {
         printWidth: 100,
         jsxSingleQuote: true
       }
-    ]
+    ],
+    'react/prop-types': 'off'
   }
 };

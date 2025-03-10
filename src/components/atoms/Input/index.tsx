@@ -2,7 +2,6 @@ import React, { forwardRef } from 'react';
 
 import Icon, { IconName, IconSize } from '~/components/atoms/Icon';
 import Typography from '~/components/atoms/Typography';
-
 import { ModifierUtils } from '~/utils';
 import './index.scss';
 

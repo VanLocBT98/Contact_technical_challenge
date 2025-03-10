@@ -1,3 +1,4 @@
 .c-exLayout {
-
+  @include adjust-flex();
+  column-gap: rem(20);
 }

@@ -1,30 +1,37 @@
+import { LicenseInfo } from '@mui/x-license-pro';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { LicenseManager } from 'ag-grid-enterprise';
 import { HelmetProvider } from 'react-helmet-async';
-import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 
 import router from '~/routes';
-import { store } from '~/stores';
 
+import { GlobalStoreProvider } from './stores';
+LicenseInfo.setLicenseKey(import.meta.env.VITE_API_MUI_X_LICENSE_KEY);
+LicenseManager.setLicenseKey(import.meta.env.VITE_API_AG_GRID_LICENSE_KEY);
 function App() {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
+        refetchOnMount: false,
         refetchOnWindowFocus: false,
-        retry: 0
+        refetchOnReconnect: false,
+        retry: 2,
+        staleTime: Infinity,
+        cacheTime: 10 * 60 * 1000
       }
     }
   });
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
+      <GlobalStoreProvider>
         <HelmetProvider>
           <RouterProvider router={router} />
         </HelmetProvider>
-      </Provider>
-      <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </GlobalStoreProvider>
     </QueryClientProvider>
   );
 }

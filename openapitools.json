@@ -1,0 +1,26 @@
+{
+  "generator-cli": {
+    "version": "6.6.0"
+  },
+  "generators": {
+    "react-sdk": {
+      "generatorName": "typescript-axios",
+      "inputSpec": "https://petstore3.swagger.io/api/v3/openapi.json",
+      "output": "src/sdk",
+      "typeMappings": {
+        "DateTime": "Date"
+      },
+      "generateAliasAsModel": true,
+      "apiPackage": "apis",
+      "modelPackage": "models",
+      "additionalProperties": {
+        "withSeparateModelsAndApi": true,
+        "stringEnums": true,
+        "useSingleRequestParameter": true,
+        "supportsES6": true,
+        "typescriptThreePlus": true
+      },
+      "skipValidateSpec": true
+    }
+  }
+}

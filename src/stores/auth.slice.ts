@@ -1,31 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-import { IUserResponse } from '~/services/auth/types';
-
-interface IAuthState {
-  currentUser: IUserResponse | null;
-  loadingProfile: boolean | null;
+export interface AuthState {
+  user: { name: string } | null;
+  login: (user: { name: string }) => void;
+  logout: () => void;
 }
 
-const initialState: IAuthState = {
-  currentUser: null,
-  loadingProfile: null
-};
-
-/* Creating a slice of the redux store. */
-const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  reducers: {
-    setCurrentUser: (state, action) => {
-      state.currentUser = action.payload !== null ? { ...(action.payload as IUserResponse) } : null;
-    },
-    setProfileLoading: (state, action) => {
-      state.loadingProfile = action.payload;
-    }
-  }
+// Hàm tạo state cho Auth
+export const createAuthStore = (set: any): AuthState => ({
+  user: null,
+  login: (user) => set({ user }),
+  logout: () => set({ user: null })
 });
-
-export const { setCurrentUser, setProfileLoading } = authSlice.actions;
-
-export default authSlice.reducer;

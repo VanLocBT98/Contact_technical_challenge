@@ -9,3 +9,11 @@
     }
   }
 }
+.button-group {
+  @include adjust-flex();
+  column-gap: rem(10);
+  flex-wrap: wrap;
+  .a-button {
+    margin: 0 0 rem(5);
+  }
+}

@@ -44,8 +44,8 @@ const Button: React.FC<IButtonProps> = ({
   );
 };
 
-Button.defaultProps = {
-  children: undefined
-};
+// Button.defaultProps = {
+//   children: undefined
+// };
 
 export default Button;

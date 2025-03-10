@@ -8,13 +8,14 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [react(), svgr()],
   server: {
-    port: 3000
+    port: 3200
   },
   css: {
     devSourcemap: true,
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "~/styles/index.scss";`
+        additionalData: `@import "~/styles/index.scss";`,
+        quietDeps: true
       }
     }
   },
