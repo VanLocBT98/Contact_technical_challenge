@@ -1,0 +1,7 @@
+.t-aggrid {
+  &_btn {
+    @include adjust-flex();
+    column-gap: rem(10);
+    padding: rem(10);
+  }
+}

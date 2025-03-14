@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from 'react';
+import React, { forwardRef, useCallback, useMemo, useState } from 'react';
 
 import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 import {
@@ -30,6 +30,9 @@ import {
 } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
+import Button from '~/components/atoms/Button';
+
+import { exportToPDF } from './exportPdf';
 import './index.scss';
 
 type GrandTotalRowType = 'top' | 'bottom' | undefined;
@@ -37,9 +40,7 @@ type GrandTotalRowType = 'top' | 'bottom' | undefined;
 export interface IAgGridProps<T extends object> {
   columnDefs: ColDef<T>[];
   rowData: T[];
-  // enabledModules?: (keyof typeof AVAILABLE_MODULES)[];
   isSideBar?: boolean;
-  onCellValueChanged?: (event: any) => void;
   isLoading?: boolean;
   grandTotalRow?: GrandTotalRowType;
   isEnableCharts?: boolean;
@@ -47,6 +48,7 @@ export interface IAgGridProps<T extends object> {
   isPivotMode?: boolean;
   autoGroupColumnDef?: ColDef<T>;
   defaultColDef?: ColDef<T>;
+  onChart?: () => void;
 }
 
 // const AVAILABLE_MODULES = {
@@ -98,23 +100,19 @@ const AgGridComponent = <T extends { id: string }>(
   const {
     columnDefs,
     rowData,
-    // enabledModules = [],
-    isSideBar,
-    onCellValueChanged,
-    isLoading,
+    isSideBar = false,
+    isLoading = false,
     grandTotalRow,
-    isEnableCharts,
-    isCellSelection,
-    isPivotMode,
+    isEnableCharts = false,
+    isCellSelection = false,
+    isPivotMode = false,
     autoGroupColumnDef,
-    defaultColDef
+    defaultColDef,
+    onChart
   } = props;
 
-  // useMemo(() => {
-  //   if (enabledModules.length > 0) {
-  //     ModuleRegistry.registerModules(enabledModules.map((key) => AVAILABLE_MODULES[key]));
-  //   }
-  // }, [enabledModules]);
+  const [isDisableSave, setIsDisableSave] = useState(isPivotMode);
+  const [editedRows, setEditedRows] = useState({});
 
   const popupParent = useMemo<HTMLElement | null>(() => document.body, []);
 
@@ -124,9 +122,54 @@ const AgGridComponent = <T extends { id: string }>(
     }),
     []
   );
+  if (ref && 'current' in ref && ref.current) {
+    console.log(ref.current.api?.isPivotMode());
+    console.log('object');
+  }
+  const onBtExport = useCallback(() => {
+    if (ref && 'current' in ref && ref.current) {
+      ref.current.api.exportDataAsExcel();
+    }
+  }, []);
 
+  const onCellValueChanged = useCallback((event: any) => {
+    setEditedRows((prevRows) => ({
+      ...prevRows,
+      [event.data.id]: event.data
+    }));
+  }, []);
+  const modifiedRows = Object.values(editedRows);
+  const onSave = () => {
+    console.log('Edited Rows:', modifiedRows);
+  };
+  console.log('Edited Rows:', modifiedRows);
+
+  const handleExportPDF = () => {
+    if (ref && 'current' in ref && ref.current) {
+      const gridApi = ref.current.api;
+      exportToPDF(gridApi);
+    }
+  };
+  const onPivotModeChanged = useCallback(() => {
+    if (ref && 'current' in ref && ref.current) {
+      const isPivotMode = ref?.current?.api.isPivotMode();
+      setIsDisableSave(isPivotMode ?? false);
+    }
+  }, [ref]);
   return (
-    <div className='ag-theme-alpine' style={{ height: 500, width: '100%' }}>
+    <div className='t-aggrid' style={{ height: 500, width: '100%' }}>
+      <div className='t-aggrid_btn'>
+        {onChart && (
+          <Button onClick={onChart} disabled={isDisableSave}>
+            Top 5 Medal Winners
+          </Button>
+        )}
+        <Button onClick={handleExportPDF} disabled={isDisableSave}>
+          Export to PDF
+        </Button>
+        <Button onClick={onBtExport}>Download CSV export file</Button>
+        {isCellSelection && <Button onClick={onSave}>Save</Button>}
+      </div>
       <AgGridReact<T>
         ref={ref}
         rowData={rowData}
@@ -143,6 +186,7 @@ const AgGridComponent = <T extends { id: string }>(
         pivotMode={isPivotMode}
         autoGroupColumnDef={autoGroupColumnDef}
         defaultColDef={defaultColDef}
+        onColumnPivotModeChanged={onPivotModeChanged}
       />
     </div>
   );

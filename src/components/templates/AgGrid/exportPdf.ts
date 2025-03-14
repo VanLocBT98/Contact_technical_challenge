@@ -169,9 +169,9 @@ const getDocument = (gridApi: GridApi) => {
           headerRows: 1,
           widths: ['10%', ...columns.map(() => `${90 / columns.length}%`)],
           body: [headerRow, ...rows],
-          heights: 12
+          heights: 15
         },
-        fontSize: 11
+        fontSize: 12
       }
     ],
     images: {
