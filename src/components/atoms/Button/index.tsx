@@ -1,7 +1,7 @@
 import React from 'react';
 
 import imgLoading from '~/assets/images/loading.gif';
-import { ModifierUtils } from '~/utils';
+import { ModifierUtils } from '~/shares/utils';
 
 import './index.scss';
 

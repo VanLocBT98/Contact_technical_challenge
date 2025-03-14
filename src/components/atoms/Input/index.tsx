@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import Icon, { IconName, IconSize } from '~/components/atoms/Icon';
 import Typography from '~/components/atoms/Typography';
-import { ModifierUtils } from '~/utils';
+import { ModifierUtils } from '~/shares/utils';
 import './index.scss';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {

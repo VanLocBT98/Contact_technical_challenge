@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { contactService } from '~/services/contact/index.service';
+import { contactService } from '~/shares/services/contact/index.service';
 
 export const useOlympicData = () => {
   return useQuery({

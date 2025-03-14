@@ -1,16 +1,18 @@
+import React, { useState } from 'react';
+
 import emailjs from '@emailjs/browser';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
+
 import { dataConfirm } from '~/assets/dummy/mock';
 import Button from '~/components/atoms/Button';
 import Input from '~/components/atoms/Input';
 import TextArea from '~/components/atoms/TextArea';
 import Typography from '~/components/atoms/Typography';
 import Notify from '~/components/organisms/Notify';
-import { capitalizeKeys } from '~/hooks/useCapitalize';
-import { TYPE } from '~/utils/enums';
-import { contactSchemas } from '~/utils/schemas';
+import { capitalizeKeys } from '~/shares/hooks/useCapitalize';
+import { TYPE } from '~/shares/utils/enums';
+import { contactSchemas } from '~/shares/utils/schemas';
 import './index.scss';
 export interface ContactFormInput {
   name: string;

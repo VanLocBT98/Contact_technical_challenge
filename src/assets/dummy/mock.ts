@@ -1,4 +1,4 @@
-import { PLACEHOLDERS } from '~/utils/enums';
+import { PLACEHOLDERS } from '~/shares/utils/enums';
 
 export const dataOption = [
   {

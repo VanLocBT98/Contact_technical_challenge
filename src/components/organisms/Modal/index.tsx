@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import './index.scss';
 
 import Icon, { IconName, IconSize } from '~/components/atoms/Icon';
-import { ModifierUtils } from '~/utils';
+import { ModifierUtils } from '~/shares/utils';
 
 interface Props {
   isOpen?: boolean;

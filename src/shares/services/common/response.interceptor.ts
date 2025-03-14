@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios';
 
-import authService, { AUTH_ENDPOINT } from '~/services/auth/auth.service';
+import authService, { AUTH_ENDPOINT } from '~/shares/services/auth/auth.service';
 
 import { ApiService } from './api.service';
 

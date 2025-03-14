@@ -1,5 +1,5 @@
 ---
-to: src/containers/<%= h.changeCase.pascalCase(name) %>/index.tsx
+to: src/layouts/<%= h.changeCase.pascalCase(name) %>/index.tsx
 ---
 import React from 'react';
 import { Outlet } from 'react-router-dom';

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { IUser } from '~/services/auth/types';
+import { IUser } from '~/shares/services/auth/types';
 
 interface IUserInterface {
   user: IUser | null;

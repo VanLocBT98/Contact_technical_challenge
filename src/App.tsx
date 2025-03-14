@@ -6,8 +6,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { RouterProvider } from 'react-router-dom';
 
 import router from '~/routes';
-
-import { GlobalStoreProvider } from './stores';
+import { GlobalStoreProvider } from '~/shares/stores';
 LicenseInfo.setLicenseKey(import.meta.env.VITE_API_MUI_X_LICENSE_KEY);
 LicenseManager.setLicenseKey(import.meta.env.VITE_API_AG_GRID_LICENSE_KEY);
 function App() {

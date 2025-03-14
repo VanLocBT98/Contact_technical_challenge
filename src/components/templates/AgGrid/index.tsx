@@ -1,15 +1,18 @@
 import React, { forwardRef, useMemo } from 'react';
-import './index.scss';
 
 import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 import {
+  ClientSideRowModelApiModule,
   ClientSideRowModelModule,
   ColDef,
   CsvExportModule,
+  CustomEditorModule,
+  DateFilterModule,
   ExcelExportParams,
   ModuleRegistry,
   NumberEditorModule,
   NumberFilterModule,
+  QuickFilterModule,
   SelectEditorModule,
   TextEditorModule,
   TextFilterModule,
@@ -27,12 +30,14 @@ import {
 } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
+import './index.scss';
+
 type GrandTotalRowType = 'top' | 'bottom' | undefined;
 
 export interface IAgGridProps<T extends object> {
   columnDefs: ColDef<T>[];
   rowData: T[];
-  enabledModules?: (keyof typeof AVAILABLE_MODULES)[];
+  // enabledModules?: (keyof typeof AVAILABLE_MODULES)[];
   isSideBar?: boolean;
   onCellValueChanged?: (event: any) => void;
   isLoading?: boolean;
@@ -44,24 +49,47 @@ export interface IAgGridProps<T extends object> {
   defaultColDef?: ColDef<T>;
 }
 
-const AVAILABLE_MODULES = {
-  clientSideRowModel: ClientSideRowModelModule,
-  columnsToolPanel: ColumnsToolPanelModule,
-  columnMenu: ColumnMenuModule,
-  contextMenu: ContextMenuModule,
-  filtersToolPanel: FiltersToolPanelModule,
-  validation: ValidationModule,
-  csvExport: CsvExportModule,
-  excelExport: ExcelExportModule,
-  pivot: PivotModule,
-  numberFilter: NumberFilterModule,
-  setFilter: SetFilterModule,
-  textEditor: TextEditorModule,
-  numberEditor: NumberEditorModule,
-  selectEditor: SelectEditorModule,
-  integratedCharts: IntegratedChartsModule.with(AgChartsEnterpriseModule),
-  textFilter: TextFilterModule
-};
+// const AVAILABLE_MODULES = {
+//   clientSideRowModel: ClientSideRowModelModule,
+//   columnsToolPanel: ColumnsToolPanelModule,
+//   columnMenu: ColumnMenuModule,
+//   contextMenu: ContextMenuModule,
+//   filtersToolPanel: FiltersToolPanelModule,
+//   validation: ValidationModule,
+//   csvExport: CsvExportModule,
+//   excelExport: ExcelExportModule,
+//   pivot: PivotModule,
+//   numberFilter: NumberFilterModule,
+//   setFilter: SetFilterModule,
+//   textEditor: TextEditorModule,
+//   numberEditor: NumberEditorModule,
+//   selectEditor: SelectEditorModule,
+//   integratedCharts: IntegratedChartsModule.with(AgChartsEnterpriseModule),
+//   textFilter: TextFilterModule,
+//   test: ClientSideRowModelApiModule
+// };
+ModuleRegistry.registerModules([
+  ClientSideRowModelModule,
+  ColumnMenuModule,
+  ContextMenuModule,
+  SetFilterModule,
+  TextFilterModule,
+  NumberFilterModule,
+  DateFilterModule,
+  ValidationModule,
+  CsvExportModule,
+  NumberEditorModule,
+  TextEditorModule,
+  CustomEditorModule,
+  QuickFilterModule,
+  ClientSideRowModelApiModule,
+  IntegratedChartsModule.with(AgChartsEnterpriseModule),
+  SelectEditorModule,
+  PivotModule,
+  ExcelExportModule,
+  FiltersToolPanelModule,
+  ColumnsToolPanelModule
+]);
 
 const AgGridComponent = <T extends { id: string }>(
   props: IAgGridProps<T>,
@@ -70,7 +98,7 @@ const AgGridComponent = <T extends { id: string }>(
   const {
     columnDefs,
     rowData,
-    enabledModules = [],
+    // enabledModules = [],
     isSideBar,
     onCellValueChanged,
     isLoading,
@@ -82,11 +110,11 @@ const AgGridComponent = <T extends { id: string }>(
     defaultColDef
   } = props;
 
-  useMemo(() => {
-    if (enabledModules.length > 0) {
-      ModuleRegistry.registerModules(enabledModules.map((key) => AVAILABLE_MODULES[key]));
-    }
-  }, [enabledModules]);
+  // useMemo(() => {
+  //   if (enabledModules.length > 0) {
+  //     ModuleRegistry.registerModules(enabledModules.map((key) => AVAILABLE_MODULES[key]));
+  //   }
+  // }, [enabledModules]);
 
   const popupParent = useMemo<HTMLElement | null>(() => document.body, []);
 
@@ -96,6 +124,7 @@ const AgGridComponent = <T extends { id: string }>(
     }),
     []
   );
+
   return (
     <div className='ag-theme-alpine' style={{ height: 500, width: '100%' }}>
       <AgGridReact<T>

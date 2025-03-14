@@ -6,10 +6,12 @@ import { AgGridReact } from 'ag-grid-react';
 
 import Button from '~/components/atoms/Button';
 import ForwardedAgGridComponent from '~/components/templates/AgGrid';
-import { Pet } from '~/sdk';
-import { useOlympicData } from '~/sdk/apis/pets';
-import { useStore } from '~/stores';
+import { exportToPDF } from '~/components/templates/AgGrid/exportPdf';
+import { useStore } from '~/shares/stores';
 import { IOlympicData } from '~/types';
+
+import { Pet } from '~sdk/api';
+import { useOlympicData } from '~sdk/apis/pets';
 
 export default function Standard() {
   const {
@@ -33,7 +35,7 @@ export default function Standard() {
   const [columnDefs] = useState<ColDef[]>([
     { field: 'country', rowGroup: true, enableRowGroup: true, filter: 'agTextColumnFilter' },
     { field: 'gold', aggFunc: 'sum', enableValue: true, editable: true },
-    { field: 'silver', aggFunc: 'sum', enableValue: true, editable: true },
+    { field: 'silver', aggFunc: 'sum', enableValue: true, editable: true, enableRowGroup: true },
     {
       field: 'sport',
       enablePivot: true,
@@ -73,10 +75,12 @@ export default function Standard() {
       [event.data.id]: event.data
     }));
   }, []);
+  const modifiedRows = Object.values(editedRows);
   const onSave = () => {
-    const modifiedRows = Object.values(editedRows);
     console.log('Edited Rows:', modifiedRows);
   };
+  console.log('Edited Rows:', modifiedRows);
+
   const onChart1 = useCallback(() => {
     if (!gridRef.current?.api) return;
     gridRef.current.api.createRangeChart({
@@ -97,22 +101,28 @@ export default function Standard() {
     });
   }, []);
   const dataRef = useOlympicData();
-  console.log(dataRef);
   const pet: Pet = {
     id: 1,
     name: 'pet',
     category: {},
     photoUrls: [],
-    tags: [],
-    status: 'available'
+    tags: []
   };
-  console.log(pet);
+  console.log(pet, dataRef);
+  const handleExportPDF = () => {
+    if (gridRef.current) {
+      const gridApi = gridRef.current.api;
+      exportToPDF(gridApi);
+    }
+  };
+
   return (
     <div style={containerStyle}>
       <div className='p-servicers_btn'>
         <Button onClick={onChart1}>Top 5 Medal Winners</Button>
         <Button onClick={onBtExport}>Download CSV export file</Button>
         <Button onClick={onSave}>Save</Button>
+        <Button onClick={handleExportPDF}>Export to PDF</Button>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -130,24 +140,6 @@ export default function Standard() {
             isCellSelection
             isEnableCharts
             defaultColDef={defaultColDef}
-            enabledModules={[
-              'clientSideRowModel',
-              'columnMenu',
-              'columnsToolPanel',
-              'contextMenu',
-              'csvExport',
-              'excelExport',
-              'filtersToolPanel',
-              'integratedCharts',
-              'pivot',
-              'numberEditor',
-              'numberFilter',
-              'setFilter',
-              'textEditor',
-              'textFilter',
-              'selectEditor',
-              'validation'
-            ]}
           />
         </div>
       </div>

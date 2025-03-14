@@ -34,7 +34,8 @@ const config: StorybookConfig = {
         }
       },
       resolve: {
-        alias: { '~': path.resolve(__dirname, '../src') }
+        alias: { '~': path.resolve(__dirname, '../src'), '~sdk': path.resolve(__dirname, '../sdk') },
+
       }
     });
   }

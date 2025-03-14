@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-indent */
 import React, { forwardRef } from 'react';
 import Typography from '~/components/atoms/Typography';
-import { ModifierUtils } from '~/utils';
+import { ModifierUtils } from '~/shares/utils';
 import './index.scss';
 
 type Variant = 'contact';
@@ -35,7 +35,7 @@ const TextAreaRef: React.ForwardRefRenderFunction<HTMLTextAreaElement, TextAreaP
     colorError,
     value,
     disabled,
-    handleOnchange = () => {},
+    handleOnchange = () => { },
     modifiers,
     variant,
     readOnly = false,

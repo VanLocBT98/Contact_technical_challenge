@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ModifierUtils } from '~/utils';
+import { ModifierUtils } from '~/shares/utils';
 import './index.scss';
 
 export const iconList = {

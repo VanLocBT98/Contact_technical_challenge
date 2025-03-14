@@ -2,7 +2,7 @@ import React from 'react';
 
 import DOMPurify from 'dompurify';
 
-import { ModifierUtils } from '~/utils';
+import { ModifierUtils } from '~/shares/utils';
 
 import './index.scss';
 

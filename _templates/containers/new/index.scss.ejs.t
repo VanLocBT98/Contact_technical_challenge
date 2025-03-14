@@ -1,3 +1,3 @@
 ---
-to: src/containers/<%= h.changeCase.pascalCase(name) %>/index.scss
+to: src/layouts/<%= h.changeCase.pascalCase(name) %>/index.scss
 ---

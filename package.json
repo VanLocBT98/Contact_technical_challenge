@@ -17,7 +17,8 @@
     "gen:container": "hygen containers new",
     "gen:page": "hygen pages new",
     "prepare": "husky install",
-    "version": "auto-changelog -p && git add CHANGELOG.md"
+    "version": "auto-changelog -p && git add CHANGELOG.md",
+    "generate": "openapi-generator-cli generate -c openapitools.json"
   },
   "dependencies": {
     "@commitlint/cli": "^17.6.6",
@@ -29,6 +30,7 @@
     "@mui/x-license-pro": "^6.10.2",
     "@openapitools/openapi-generator-cli": "^2.17.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "@simonwep/pickr": "^1.9.1",
     "@storybook/addon-docs": "^7.0.24",
     "@storybook/preset-create-react-app": "^7.0.24",
     "@storybook/preset-scss": "^1.0.3",
@@ -41,6 +43,9 @@
     "dompurify": "^2.3.10",
     "emailjs-com": "^3.2.0",
     "hygen": "^6.2.11",
+    "jspdf": "^3.0.0",
+    "jspdf-autotable": "^5.0.2",
+    "pdfmake": "^0.2.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-recaptcha-v3": "1.9.7",
@@ -82,6 +87,7 @@
     "@tanstack/react-virtual": "^3.13.2",
     "@types/dompurify": "^2.3.3",
     "@types/node": "^20.3.2",
+    "@types/pdfmake": "^0.2.11",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^18.0.11",
     "@types/react-modal": "^3.16.3",

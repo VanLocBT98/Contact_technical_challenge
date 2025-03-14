@@ -1,11 +1,9 @@
 {
-  "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
-  "spaces": 2,
   "generator-cli": {
     "version": "7.12.0"
   },
   "generators": {
-    "typescript-axios": {
+    "1.0": {
       "generatorName": "typescript-axios",
       "inputSpec": "https://petstore3.swagger.io/api/v3/openapi.json",
       "output": "sdk",
@@ -19,6 +17,8 @@
       "apiPackage": "apis",
       "modelPackage": "models",
       "additionalProperties": {
+        "typeMappings": "integer=string,int32=string,int64=string",
+        "withSeparateModelsAndApi": true,
         "stringEnums": true,
         "useSingleRequestParameter": true,
         "supportsES6": true,

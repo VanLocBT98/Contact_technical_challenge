@@ -1,4 +1,4 @@
-import { ApiService } from '~/services/common/api.service';
+import { ApiService } from '~/shares/services/common/api.service';
 
 enum EXAMPLE_ENDPOINT {
   LIST = 'list',

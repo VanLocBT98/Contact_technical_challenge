@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { DataGridPremium, GridColDef, GridToolbar } from '@mui/x-data-grid-premium';
 
 import Button from '~/components/atoms/Button';
-import { useStore } from '~/stores';
+import { useStore } from '~/shares/stores';
 import { IOlympicData } from '~/types';
 
 const COLUMNS: GridColDef[] = [

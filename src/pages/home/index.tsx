@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './index.scss';
 
 import {
+  ClientSideRowModelApiModule,
   ClientSideRowModelModule,
   ColDef,
   CsvExportModule,
@@ -26,9 +27,11 @@ import { AgGridReact } from 'ag-grid-react';
 
 import Button from '~/components/atoms/Button';
 import Input from '~/components/atoms/Input';
-import { useOlympicData } from '~/sdk/apis/pets';
-import { useStore } from '~/stores';
+import { exportToPDF } from '~/components/templates/AgGrid/exportPdf';
+import { useStore } from '~/shares/stores';
 import { IOlympicData } from '~/types';
+
+import { useOlympicData } from '~sdk/apis/pets';
 
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
@@ -43,7 +46,8 @@ ModuleRegistry.registerModules([
   NumberEditorModule,
   TextEditorModule,
   CustomEditorModule,
-  QuickFilterModule
+  QuickFilterModule,
+  ClientSideRowModelApiModule
 ]);
 
 const dateFilterParams: IDateFilterParams = {
@@ -73,7 +77,7 @@ export default function Home() {
   const gridStyle = useMemo(() => ({ height: '100%', width: '100%' }), []);
   const [rowData, setRowData] = useState<IOlympicData[]>();
   const [columnDefs] = useState<ColDef[]>([
-    { field: 'athlete', filter: 'agTextColumnFilter' },
+    { field: 'athlete', filter: 'agTextColumnFilter', pinned: 'left' },
     { field: 'age', cellEditor: 'agNumberCellEditor', filter: 'agNumberColumnFilter' },
     { field: 'country', filter: 'agTextColumnFilter' },
     {
@@ -354,8 +358,10 @@ export default function Home() {
       console.log(`Page loaded in ${t1 - t0}ms`);
     };
   }, []);
-  const dataRef = useOlympicData();
+  const { data: dataRef } = useOlympicData();
   console.log(dataRef);
+
+  console.log(gridRef.current?.api?.getAllDisplayedColumnGroups());
   return (
     <div style={containerStyle}>
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -384,6 +390,8 @@ export default function Home() {
           </span>
         </div>
         <Button onClick={onBtnExport}>Download CSV export file</Button>
+        <Button onClick={() => exportToPDF(gridRef.current?.api as any)}>Export to PDF</Button>
+
         <div className='example-header'>
           <Input
             type='text'

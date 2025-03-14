@@ -1,7 +1,7 @@
 import { AxiosPromise } from 'axios';
 
-import { ApiService } from '~/services/common/api.service';
-import { CookieUtils } from '~/utils';
+import { ApiService } from '~/shares/services/common/api.service';
+import { CookieUtils } from '~/shares/utils';
 
 import { ILoginRequest, ITokenResponse, IUserResponse } from './types';
 

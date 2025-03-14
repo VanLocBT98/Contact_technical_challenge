@@ -1,9 +1,11 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
+
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import './index.scss';
 
 import emailjs from '@emailjs/browser';
+
 import { dataConfirm } from '~/assets/dummy/mock';
 import Button from '~/components/atoms/Button';
 import Input from '~/components/atoms/Input';
@@ -11,9 +13,9 @@ import TextArea from '~/components/atoms/TextArea';
 import Typography from '~/components/atoms/Typography';
 import Notify from '~/components/organisms/Notify';
 import { ContactFormInput, ContactFormProps } from '~/components/templates/ContactFormNormal';
-import { capitalizeKeys } from '~/hooks/useCapitalize';
-import { TYPE } from '~/utils/enums';
-import { consultancySchemas } from '~/utils/schemas';
+import { capitalizeKeys } from '~/shares/hooks/useCapitalize';
+import { TYPE } from '~/shares/utils/enums';
+import { consultancySchemas } from '~/shares/utils/schemas';
 const ContactFormPremium: React.FC<ContactFormProps> = ({
   title,
   description,

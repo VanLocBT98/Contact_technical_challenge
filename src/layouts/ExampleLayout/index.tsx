@@ -6,11 +6,15 @@ import { Outlet } from 'react-router-dom';
 
 import Link from '~/components/atoms/Link';
 import Typography from '~/components/atoms/Typography';
-import { contactService } from '~/services/contact/index.service';
-import { useStore } from '~/stores';
+import { contactService } from '~/shares/services/contact/index.service';
+import { useStore } from '~/shares/stores';
 import { IOlympicData } from '~/types';
 
-const ExampleLayout: React.FC = ({ children }: { children: ReactNode }) => {
+interface ExampleLayoutProps {
+  children: ReactNode;
+}
+
+const ExampleLayout: React.FC<ExampleLayoutProps> = ({ children }) => {
   const {
     MockData: { list, fetchOlympicData }
   } = useStore();
@@ -45,10 +49,6 @@ const ExampleLayout: React.FC = ({ children }: { children: ReactNode }) => {
       <Outlet />
     </div>
   );
-};
-
-ExampleLayout.defaultProps = {
-  children: undefined
 };
 
 export default React.memo(ExampleLayout);

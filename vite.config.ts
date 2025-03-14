@@ -14,14 +14,15 @@ export default defineConfig({
     devSourcemap: true,
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "~/styles/index.scss";`,
+        additionalData: `@import "~/shares/styles/index.scss";`,
         quietDeps: true
       }
     }
   },
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, './src')
+      '~': path.resolve(__dirname, './src'),
+      '~sdk': path.resolve(__dirname, './sdk')
     }
   }
 });

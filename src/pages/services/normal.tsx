@@ -17,7 +17,7 @@ import {
 } from '@tanstack/react-table';
 import { useVirtualizer, VirtualItem, Virtualizer } from '@tanstack/react-virtual';
 
-import { useStore } from '~/stores';
+import { useStore } from '~/shares/stores';
 import { IOlympicData } from '~/types';
 
 export default function Normal() {
@@ -101,6 +101,7 @@ export default function Normal() {
   }, [list]);
 
   const tableContainerRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <div
       className='container'

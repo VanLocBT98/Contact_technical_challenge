@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 // Containers Layout
-const ExampleLayout = React.lazy(() => import('~/containers/ExampleLayout'));
+const ExampleLayout = React.lazy(() => import('~/layouts/ExampleLayout'));
 const Normal = React.lazy(() => import('~/pages/services/normal'));
 const Standard = React.lazy(() => import('~/pages/services/standard'));
 const Premium = React.lazy(() => import('~/pages/services/premium'));
