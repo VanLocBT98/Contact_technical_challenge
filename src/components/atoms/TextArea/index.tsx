@@ -35,7 +35,7 @@ const TextAreaRef: React.ForwardRefRenderFunction<HTMLTextAreaElement, TextAreaP
     colorError,
     value,
     disabled,
-    handleOnchange = () => { },
+    handleOnchange = () => {},
     modifiers,
     variant,
     readOnly = false,
