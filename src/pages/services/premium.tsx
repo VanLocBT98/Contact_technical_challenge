@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import { DataGridPremium, GridColDef, GridToolbar } from '@mui/x-data-grid-premium';
+import { GridColDef, GridToolbar } from '@mui/x-data-grid';
+import { DataGridPremium } from '@mui/x-data-grid-premium';
 
 import Button from '~/components/atoms/Button';
 import { useStore } from '~/shares/stores';
@@ -27,7 +28,7 @@ export default function Premium() {
   } = useStore();
   const [data, setData] = React.useState<IOlympicData[]>([]);
   useEffect(() => {
-    setData(list.map((item, index) => ({ ...item, id: `${index}- hihi` })));
+    setData(list.map((item, index) => ({ ...item, id: `${index}-hihi` })));
   }, [list]);
   return (
     <div>

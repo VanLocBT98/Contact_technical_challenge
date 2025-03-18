@@ -1,10 +1,7 @@
 import { Column, GridApi, RowNode } from 'ag-grid-community';
 import pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-
-if (pdfFonts?.pdfMake?.vfs) {
-  pdfMake.vfs = pdfFonts.pdfMake.vfs;
-}
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.addVirtualFileSystem(pdfFonts);
 
 const PDF_LOGO =
   'https://raw.githubusercontent.com/AhmedAGadir/ag-grid-todo-list-react-typescript/master/src/assets/new-ag-grid-logo.png';
@@ -21,8 +18,8 @@ const getHeaderToExport = (
 }[] => {
   return [
     {
-      text: 'STT',
-      colId: 'stt',
+      text: 'No',
+      colId: 'no',
       style: 'tableHeader',
       fillColor: '#d3d3d3',
       bold: true,
@@ -47,7 +44,6 @@ const getHeaderToExport = (
       };
 
       const parentGroup = col.getParent();
-
       if (parentGroup && parentGroup.getGroupId) {
         headerCell.text = parentGroup.getColGroupDef()?.headerName ?? 'Group';
         headerCell.colSpan = parentGroup.getChildren()?.length ?? 1;
@@ -62,7 +58,7 @@ const getHeaderToExport = (
         headerName = headerName || headerNameUppercase;
 
         if (col.isFilterActive()) {
-          headerName += ` [FILTERING]`;
+          // headerName += ` [FILTERING]`;
         }
 
         headerCell.text = headerName;
@@ -126,14 +122,13 @@ const getRowsToExport = (
 
 const getDocument = (gridApi: GridApi) => {
   const columns: Column[] = gridApi.getAllDisplayedColumnGroups() as Column[];
-
   const headerRow = getHeaderToExport(columns);
   const rows = getRowsToExport(gridApi, columns);
-
+  const totalWidth = columns.reduce((sum, col) => sum + (col.getActualWidth() || 0), 0);
   return {
     pageSize: 'A4',
     pageOrientation: 'portrait',
-    pageMargins: [40, 40, 40, 80],
+    pageMargins: [20, 40, 20, 80],
 
     header: (currentPage: number) => {
       if (currentPage === 1) {
@@ -167,7 +162,7 @@ const getDocument = (gridApi: GridApi) => {
       {
         table: {
           headerRows: 1,
-          widths: ['10%', ...columns.map(() => `${90 / columns.length}%`)],
+          widths: ['10%', ...columns.map((col) => `${(col.getActualWidth() / totalWidth) * 90}%`)],
           body: [headerRow, ...rows],
           heights: 15
         },

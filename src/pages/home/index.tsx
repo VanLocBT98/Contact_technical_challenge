@@ -77,17 +77,22 @@ export default function Home() {
   const gridStyle = useMemo(() => ({ height: '100%', width: '100%' }), []);
   const [rowData, setRowData] = useState<IOlympicData[]>();
   const [columnDefs] = useState<ColDef[]>([
-    { field: 'athlete', filter: 'agTextColumnFilter', pinned: 'left' },
-    { field: 'age', cellEditor: 'agNumberCellEditor', filter: 'agNumberColumnFilter' },
+    { field: 'athlete', filter: 'agTextColumnFilter', pinned: 'left', minWidth: 280 },
+    {
+      field: 'age',
+      cellEditor: 'agNumberCellEditor',
+      filter: 'agNumberColumnFilter',
+      maxWidth: 130
+    },
     { field: 'country', filter: 'agTextColumnFilter' },
     {
       field: 'year',
-      maxWidth: 120,
+      maxWidth: 150,
       cellEditor: 'agNumberCellEditor'
     },
     {
       field: 'date',
-      minWidth: 215,
+      minWidth: 220,
       filter: 'agDateColumnFilter',
       filterParams: dateFilterParams
     },
@@ -95,6 +100,7 @@ export default function Home() {
     {
       field: 'gold',
       headerName: 'Gold',
+      maxWidth: 180,
       filter: 'agNumberColumnFilter',
       filterParams: {
         buttons: ['apply']
@@ -104,15 +110,17 @@ export default function Home() {
       field: 'silver',
       filter: 'agNumberColumnFilter',
       floatingFilterComponentParams: {},
-      suppressFloatingFilterButton: true
+      suppressFloatingFilterButton: true,
+      maxWidth: 180
     },
     {
       field: 'bronze',
       filter: 'agNumberColumnFilter',
       floatingFilterComponentParams: {},
-      suppressFloatingFilterButton: true
+      suppressFloatingFilterButton: true,
+      maxWidth: 180
     },
-    { field: 'total', filter: false }
+    { field: 'total', filter: false, maxWidth: 180 }
   ]);
   function getBoolean(id: string) {
     const field: any = document.querySelector('#' + id);
@@ -126,7 +134,7 @@ export default function Home() {
   const defaultColDef = useMemo<ColDef>(() => {
     return {
       flex: 1,
-      minWidth: 150,
+      minWidth: 200,
       filter: true,
       floatingFilter: true,
       suppressHeaderMenuButton: true,
@@ -180,8 +188,6 @@ export default function Home() {
     const model = gridRef.current!.api.getColumnFilterModel('country');
     if (model) {
       console.log('Country model is: ' + JSON.stringify(model));
-    } else {
-      console.log('Country model filter is not active');
     }
   }, []);
 
@@ -361,7 +367,6 @@ export default function Home() {
   const { data: dataRef } = useOlympicData();
   console.log(dataRef);
 
-  console.log(gridRef.current?.api?.getAllDisplayedColumnGroups());
   return (
     <div style={containerStyle}>
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>

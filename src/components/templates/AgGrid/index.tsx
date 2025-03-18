@@ -2,6 +2,8 @@ import React, { forwardRef, useCallback, useMemo, useState } from 'react';
 
 import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 import {
+  CellStyleModule,
+  CellValueChangedEvent,
   ClientSideRowModelApiModule,
   ClientSideRowModelModule,
   ColDef,
@@ -90,7 +92,8 @@ ModuleRegistry.registerModules([
   PivotModule,
   ExcelExportModule,
   FiltersToolPanelModule,
-  ColumnsToolPanelModule
+  ColumnsToolPanelModule,
+  CellStyleModule
 ]);
 
 const AgGridComponent = <T extends { id: string }>(
@@ -122,17 +125,13 @@ const AgGridComponent = <T extends { id: string }>(
     }),
     []
   );
-  if (ref && 'current' in ref && ref.current) {
-    console.log(ref.current.api?.isPivotMode());
-    console.log('object');
-  }
   const onBtExport = useCallback(() => {
     if (ref && 'current' in ref && ref.current) {
       ref.current.api.exportDataAsExcel();
     }
   }, []);
 
-  const onCellValueChanged = useCallback((event: any) => {
+  const onCellValueChanged = useCallback((event: CellValueChangedEvent) => {
     setEditedRows((prevRows) => ({
       ...prevRows,
       [event.data.id]: event.data
@@ -159,7 +158,7 @@ const AgGridComponent = <T extends { id: string }>(
   return (
     <div className='t-aggrid' style={{ height: 500, width: '100%' }}>
       <div className='t-aggrid_btn'>
-        {onChart && (
+        {onChart && isEnableCharts && (
           <Button onClick={onChart} disabled={isDisableSave}>
             Top 5 Medal Winners
           </Button>

@@ -12,7 +12,7 @@ export default function Standard() {
   const {
     MockData: { list, loading }
   } = useStore();
-  const gridRef = useRef<AgGridReact<IOlympicData>>(null);
+  const ref = useRef<AgGridReact<IOlympicData>>(null);
   const rowDataWithId = useMemo(() => {
     return list.map((item, index) => ({
       ...item,
@@ -27,8 +27,30 @@ export default function Standard() {
   }, [list]);
   const [columnDefs] = useState<ColDef[]>([
     { field: 'country', rowGroup: true, enableRowGroup: true, filter: 'agTextColumnFilter' },
-    { field: 'gold', aggFunc: 'sum', enableValue: true, editable: true },
-    { field: 'silver', aggFunc: 'sum', enableValue: true, editable: true, enableRowGroup: true },
+    {
+      field: 'gold',
+      aggFunc: 'sum',
+      enableValue: true,
+      editable: true,
+      filter: 'agNumberColumnFilter'
+    },
+    {
+      field: 'silver',
+      aggFunc: 'sum',
+      enableValue: true,
+      editable: true,
+      enableRowGroup: true,
+      filter: 'agNumberColumnFilter'
+    },
+    {
+      field: 'bronze',
+      aggFunc: 'sum',
+      enableValue: true,
+      editable: true,
+      filter: 'agNumberColumnFilter',
+      cellStyle: { color: 'red', 'background-color': 'pink' }
+    },
+
     {
       field: 'sport',
       enablePivot: true,
@@ -47,7 +69,8 @@ export default function Standard() {
       minWidth: 130,
       filter: true,
       enablePivot: true,
-      editable: true
+      editable: true,
+      floatingFilter: true
     };
   }, []);
 
@@ -62,7 +85,7 @@ export default function Standard() {
         cellRange: {
           rowStartIndex: 0,
           rowEndIndex: 4,
-          columns: ['country', 'gold', 'silver']
+          columns: ['country', 'gold', 'silver', 'bronze']
         },
         chartType: 'groupedColumn',
         chartThemeOverrides: {
@@ -81,7 +104,7 @@ export default function Standard() {
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <div style={gridStyle}>
           <ForwardedAgGridComponent<IOlympicData>
-            ref={gridRef}
+            ref={ref}
             rowData={rowDataWithId}
             columnDefs={columnDefs}
             isLoading={loading}

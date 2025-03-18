@@ -11,7 +11,7 @@ import { useStore } from '~/shares/stores';
 import { IOlympicData } from '~/types';
 
 interface ExampleLayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const ExampleLayout: React.FC<ExampleLayoutProps> = ({ children }) => {

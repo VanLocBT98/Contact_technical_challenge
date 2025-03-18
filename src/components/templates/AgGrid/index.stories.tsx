@@ -1,10 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import AgGrid, { IAgGridProps } from '.';
+import AgGrid from '.';
 
-interface StoryProps extends IAgGridProps {
-  children?: React.ReactNode;
-}
 const meta = {
   title: 'Components/templates/AgGrid',
   component: AgGrid,
@@ -13,8 +10,7 @@ const meta = {
 } as Meta;
 
 export default meta;
-
 type Story = StoryObj<typeof meta>;
 
-export const Normal: Story = ({ children }: StoryProps) => <AgGrid>{children}</AgGrid>;
+export const Normal: Story = () => <AgGrid columnDefs={[]} rowData={[]} />;
 Normal.args = {};

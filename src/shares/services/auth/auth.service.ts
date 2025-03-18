@@ -13,18 +13,18 @@ export enum AUTH_ENDPOINT {
 }
 
 class AuthService {
-  isLogined = false;
+  isLogged = false;
   refreshTokenRequest: Promise<string> | AxiosPromise | null = null;
   async login(data: ILoginRequest): Promise<AxiosPromise> {
     try {
       const res = await ApiService.post(AUTH_ENDPOINT.LOGIN, data);
-      this.isLogined = true;
+      this.isLogged = true;
       if (res.data) {
         this.setToken(res.data);
       }
       return res.data;
     } catch (error) {
-      this.isLogined = false;
+      this.isLogged = false;
       return Promise.reject(error);
     }
   }
@@ -38,7 +38,7 @@ class AuthService {
     try {
       const res = await ApiService.post(AUTH_ENDPOINT.LOGOUT);
       if (res) {
-        this.isLogined = false;
+        this.isLogged = false;
         CookieUtils.Remove('accessToken');
         CookieUtils.Remove('refreshToken');
       }
@@ -49,7 +49,7 @@ class AuthService {
   }
 
   isAuthenticated() {
-    if (this.isLogined) {
+    if (this.isLogged) {
       return true;
     } else if (!!CookieUtils.Get('accessToken') || !!CookieUtils.Get('refreshToken')) {
       return true;
@@ -73,7 +73,7 @@ class AuthService {
       .catch((error) => {
         CookieUtils.Remove('accessToken');
         CookieUtils.Remove('refreshToken');
-        this.isLogined = false;
+        this.isLogged = false;
         throw error;
       })
       .finally(() => {
