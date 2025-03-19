@@ -2,6 +2,8 @@ import React, { Suspense } from 'react';
 
 import { createBrowserRouter } from 'react-router-dom';
 
+import EditStandard from '~/pages/services/editStandard';
+
 // Containers Layout
 const ExampleLayout = React.lazy(() => import('~/layouts/ExampleLayout'));
 const Normal = React.lazy(() => import('~/pages/services/normal'));
@@ -41,11 +43,25 @@ const router = createBrowserRouter([
           },
           {
             path: 'standard',
-            element: (
-              <Suspense>
-                <Standard />
-              </Suspense>
-            )
+
+            children: [
+              {
+                path: '',
+                element: (
+                  <Suspense>
+                    <Standard />
+                  </Suspense>
+                )
+              },
+              {
+                path: 'edit/:id',
+                element: (
+                  <Suspense>
+                    <EditStandard />
+                  </Suspense>
+                )
+              }
+            ]
           },
           {
             path: 'premium',
