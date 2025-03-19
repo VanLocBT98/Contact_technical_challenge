@@ -38,7 +38,7 @@ const getMenuKeyFromPath = (path: string, menuItems: MenuItem[]): string => {
 
 const menuItems = [
   {
-    key: '/',
+    key: 'home',
     icon: <MailOutlined />,
     label: 'Navigation One',
     children: [
