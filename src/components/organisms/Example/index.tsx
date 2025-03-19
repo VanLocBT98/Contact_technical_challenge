@@ -9,8 +9,4 @@ const Example: React.FC<IExampleProps> = ({ children }) => {
   return <div>{children}</div>;
 };
 
-Example.defaultProps = {
-  children: undefined
-};
-
 export default Example;

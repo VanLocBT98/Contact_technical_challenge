@@ -45,7 +45,7 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
       body: JSON.stringify({ ...dataForm, Type: TYPE.PREMIUM, Price: price })
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         emailjs.sendForm(
           'service_f58kpgh',
           'template_vg4nxcn',
@@ -223,7 +223,7 @@ const ContactFormPremium: React.FC<ContactFormProps> = ({
               />
             </div>
             <div className='t-contactForm_action'>
-              <Button type='submit'>{submitText}</Button>
+              <Button>{submitText}</Button>
             </div>
           </form>
         </FormProvider>

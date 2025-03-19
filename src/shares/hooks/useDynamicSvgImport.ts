@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import SvgTest from '~/assets/icons/test';
 
 export function useDynamicSvgImport(iconName: string) {
-  const importedIconRef = useRef<React.FC<React.SVGProps<SVGElement>>>();
+  const importedIconRef = useRef<React.FC<React.SVGProps<SVGElement>>>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<unknown>();
 
@@ -13,7 +13,7 @@ export function useDynamicSvgImport(iconName: string) {
       try {
         importedIconRef.current = (await import(`~/assets/icons/${iconName}.svg`)).ReactComponent;
         if (!importedIconRef.current) {
-          importedIconRef.current = SvgTest as React.FC<React.SVGProps<SVGElement>>;
+          importedIconRef.current = SvgTest as unknown as React.FC<React.SVGProps<SVGElement>>;
         }
       } catch (err) {
         setError(err);

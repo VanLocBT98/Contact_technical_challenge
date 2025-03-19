@@ -1,7 +1,8 @@
-import { Story, Meta } from '@storybook/react';
-import React from 'react';
+import { Meta, Story } from '@storybook/react';
 
-import ContactForm, { ContactFormProps } from '.';
+import { ContactFormProps } from '../ContactFormNormal';
+
+import ContactForm from '.';
 
 export default {
   title: 'Components/templates/ContactForm',

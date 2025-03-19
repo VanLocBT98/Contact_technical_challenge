@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/display-name */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from 'react';
+import React, { RefObject, useEffect, useState } from 'react';
 
 import {
   Column,
@@ -155,7 +155,10 @@ export default function Normal() {
             </tr>
           ))}
         </thead>
-        <TableBody table={table} tableContainerRef={tableContainerRef} />
+        <TableBody
+          table={table}
+          tableContainerRef={tableContainerRef as RefObject<HTMLDivElement>}
+        />
       </table>
     </div>
   );
@@ -189,7 +192,7 @@ function DebouncedInput({
 
 function Filter({ column }: { column: Column<any, unknown> }) {
   const columnFilterValue = column.getFilterValue();
-  const { filterVariant } = column.columnDef.meta ?? {};
+  const { filterVariant } = column.columnDef.meta as any;
 
   if (filterVariant === 'range') {
     return (
