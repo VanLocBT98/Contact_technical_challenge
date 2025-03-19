@@ -1,4 +1,4 @@
 const EditStandard = () => {
-  return <>test</>;
+  return <>test page edit</>;
 };
 export default EditStandard;
